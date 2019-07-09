@@ -16,7 +16,7 @@ pages = 1000
 
 # Change this value! 
 
-genre_to_scrape = "landscape"
+genre_to_scrape = "abstract"
 
 # genre_to_scrape can be any one of the below values.
 """

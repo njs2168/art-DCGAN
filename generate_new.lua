@@ -7,11 +7,11 @@ opt = {
     batchSize = 32,        -- number of samples to produce
     noisetype = 'normal',  -- type of noise distribution (uniform / normal).
     net = '',              -- path to the generator network
-    imsize = 1,            -- used to produce larger images. 1 = 64px. 2 = 80px, 3 = 96px, ...
+    imsize = 2,            -- used to produce larger images. 1 = 64px. 2 = 80px, 3 = 96px, ...
     noisemode = 'random',  -- random / line / linefull1d / linefull
     name = 'generation1',  -- name of the file saved
-    gpu = 0,               -- gpu mode. 0 = CPU, 1 = GPU
-    display = 0,           -- Display image: 0 = false, 1 = true
+    gpu = 1,               -- gpu mode. 0 = CPU, 1 = GPU
+    display = 1,           -- Display image: 0 = false, 1 = true
     nz = 100,              
 }
 for k,v in pairs(opt) do opt[k] = tonumber(os.getenv(k)) or os.getenv(k) or opt[k] end
@@ -88,8 +88,8 @@ local images = net:forward(noise)
 print('Images size: ', images:size(1)..' x '..images:size(2) ..' x '..images:size(3)..' x '..images:size(4))
 images:add(1):mul(0.5)
 print('Min, Max, Mean, Stdv', images:min(), images:max(), images:mean(), images:std())
-image.save(opt.name .. '.png', image.toDisplayTensor(images))
-print('Saved image to: ', opt.name .. '.png')
+image.save(opt.name .. '.jpg', image.toDisplayTensor(images))
+print('Saved image to: ', opt.name .. '.jpg')
 
 
 
