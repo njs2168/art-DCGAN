@@ -4,7 +4,7 @@ local optnet = require 'optnet'
 torch.setdefaulttensortype('torch.FloatTensor')
 
 opt = {
-    batchSize = 32,        -- number of samples to produce
+    batchSize = 100,        -- number of samples to produce
     noisetype = 'normal',  -- type of noise distribution (uniform / normal).
     net = '',              -- path to the generator network
     imsize = 1,            -- used to produce larger images. 1 = 64px. 2 = 80px, 3 = 96px, ...
@@ -90,6 +90,14 @@ images:add(1):mul(0.5)
 print('Min, Max, Mean, Stdv', images:min(), images:max(), images:mean(), images:std())
 image.save(opt.name .. '.png', image.toDisplayTensor(images))
 print('Saved image to: ', opt.name .. '.png')
+
+-- loop over all batch size and save single image for each generation
+
+for i = opt.batchSize,1,-1
+do 
+   image.save(opt.name .. i .. '.png', images[i])
+   -- print('Saved image to: ', opt.name .. '.png'
+ end
 
 
 
